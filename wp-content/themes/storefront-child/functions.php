@@ -14,6 +14,9 @@ function my_theme_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 
+// making phone number optional on the checkout page
+add_filter( 'woocommerce_billing_fields', 'my_optional_fields' ); function my_optional_fields( $address_fields ) { $address_fields['billing_phone']['required'] = false; return $address_fields; }
+
 
 // <?php
 // /*
