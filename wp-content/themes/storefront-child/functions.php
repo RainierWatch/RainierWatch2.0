@@ -17,16 +17,21 @@ add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 // making phone number optional on the checkout page
 add_filter( 'woocommerce_billing_fields', 'my_optional_fields' ); function my_optional_fields( $address_fields ) { $address_fields['billing_phone']['required'] = false; return $address_fields; }
 
-//removing sidebar from all product pages
-add_action( 'wp', 'remove_sidebar_product_pages' );
+//removing sidebar from all product pages, cart, checkout and account page
+add_action( 'wp', 'remove_sidebar_from_shopping_pages' );
 
-remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
- 
-function remove_sidebar_product_pages() {
+function remove_sidebar_from_shopping_pages() {
     if ( is_product() || ( is_cart() || is_checkout() || is_account_page() ) ) {
     remove_action( 'storefront_sidebar', 'storefront_get_sidebar', 10 );
     }
 }
+
+// should be removing sidebar from all pges but its not working, perhaps needs to be storefront_sidebar
+remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+ 
+
+// removing footer from mobile view
+remove_action( 'storefront_footer', 'storefront_handheld_footer_bar', 999 );
 
 
 // <?php
