@@ -38,6 +38,12 @@ body {
 	border-bottom: none;
 }
 
+/* after removing the sidebar on woocommerce pages, making width full */
+body.woocommerce #primary {
+	float: none;
+	width: 100%;
+}
+
 
 /* footer adjustments:  */
 
