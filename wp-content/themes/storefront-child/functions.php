@@ -19,9 +19,11 @@ add_filter( 'woocommerce_billing_fields', 'my_optional_fields' ); function my_op
 
 //removing sidebar from all product pages
 add_action( 'wp', 'remove_sidebar_product_pages' );
+
+remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
  
 function remove_sidebar_product_pages() {
-    if ( is_product() ) {
+    if ( is_product() || ( is_cart() || is_checkout() || is_account_page() ) ) {
     remove_action( 'storefront_sidebar', 'storefront_get_sidebar', 10 );
     }
 }
