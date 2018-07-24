@@ -1,0 +1,166 @@
+/* FILE: main/content/__meta.scss */
+
+//
+// Entry meta
+//
+
+
+
+
+
+.entry-meta {
+	padding: 0;
+	margin-top: 0;
+	margin-bottom: $golden_major +rem;
+	border-width: 0;
+
+	&:empty,
+	.updated,
+	.label-updated {
+		display: none;
+	}
+
+	&-element {
+		@extend %font_weight_700;
+		margin-#{$right}: $golden_major +em; // {{RTL}}
+		opacity: 1;
+	}
+
+	&-description {
+		@extend %font_weight_400;
+		margin-#{$right}: $golden_minor +em; // {{RTL}}
+		text-transform: uppercase;
+	}
+
+	a {
+		text-decoration: none;
+
+		@include haf() {
+			text-decoration: underline;
+		}
+
+	}
+
+	.author {
+
+		body:not(.group-blog) & {
+			display: none;
+		}
+
+	}
+
+	.tags-links a {
+		text-transform: none;
+
+		&:not(:last-child)::after {
+			content: ',';
+		}
+
+	}
+
+	body.single[class*="paged-"] .site-main > .entry > & {
+		display: none;
+	}
+
+
+
+	// Single post meta
+
+		.single & {
+			margin-bottom: power( $golden, 2 ) +em;
+
+			&-element {
+				@extend %font_size_small;
+			}
+
+		}
+
+
+
+		// Outdented single post meta
+
+			.entry-meta-outdented .site-main > .entry > & {
+
+				@include responsive( map_get( $breakpoint, 'xl' ) ) {
+					display: inline-block;
+					float: $left; // {{RTL}}
+					max-width: 10em;
+					margin-#{$right}: -100%; // {{RTL}}
+					margin-#{$left}: -1.62rem; // {{RTL}}
+					@include rtl_property( transform, translateX( -100% ), translateX( 100% ) ); // {{RTL}}
+
+					.entry-meta-element {
+						display: block;
+						margin-bottom: 1rem;
+					}
+
+					.entry-meta-description {
+						display: block;
+						font-size: .81em;
+
+						@include in( '^.comments-link' ) {
+							display: inline;
+						}
+
+					}
+
+					.label-updated {
+						display: none;
+					}
+
+				}
+
+			}
+
+
+
+	// When page builder used
+
+		.single.fl-builder &,
+		.single.content-layout-no-paddings & {
+			padding: 1em 0;
+			margin: 0;
+			text-align: center;
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+
+			&-element {
+				display: inline;
+			}
+
+		}
+
+		.no-intro.fl-builder &,
+		.no-intro.content-layout-no-paddings & {
+			margin-top: -1px;
+		}
+
+
+
+	// In loop
+
+		.single.fl-builder .posts &,
+		.single.content-layout-no-paddings .posts & {
+			@extend %font_size_small;
+			padding: 1em 0;
+			margin: 0 0 ( $golden +rem );
+		}
+
+		.posts & {
+			@extend %font_size_small;
+			line-height: 2;
+		}
+
+}
+
+
+
+// Linked entry date
+
+	.entry-date {
+
+		a & {
+			cursor: pointer;
+		}
+
+	}
